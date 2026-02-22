@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💘</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  background:url('background.jpg') center/cover fixed;
+  font-family:'Press Start 2P', monospace;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:white;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(4px);
+  z-index:0;
+}
+
+.container{
+  position:relative;
+  z-index:2;
+}
+
+h1{
+  font-size:20px;
+  text-shadow:3px 3px 0 black;
+  margin-bottom:50px;
+}
+
+button{
+  padding:14px 28px;
+  margin:15px;
+  border:none;
+  border-radius:8px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:'Press Start 2P', monospace;
+  transition:.3s;
+}
+
+.yes{
+  background:linear-gradient(145deg,#ff4d8d,#ff2e7a);
+  color:white;
+  box-shadow:0 4px 0 #a00040;
+}
+
+.yes:hover{
+  transform:scale(1.1);
+}
+
+.no{
+  background:#444;
+  color:white;
+  position:absolute;
+}
+
+.screen{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  opacity:0;
+  pointer-events:none;
+  transition:.8s;
+}
+
+.screen.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.big-heart{
+  font-size:120px;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+#noBtn{
+  position: absolute;
+}
+
+.tease{
+  font-size:14px;
+  margin-bottom:30px;
+}
+
+.final-text{
+  font-size:16px;
+  margin-top:20px;
+  text-shadow:0 0 15px pink;
+}
+
+.heart{
+  position:fixed;
+  animation:floatHeart 6s linear forwards;
+  opacity:0.9;
+  pointer-events:none;
+  z-index:1;
+}
+
+@keyframes floatHeart{
+  0%{
+    transform:translateY(0) scale(1);
+    opacity:1;
+  }
+  100%{
+    transform:translateY(-120vh) scale(1.6);
+    opacity:0;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div class="screen active" id="screen1">
+  <div class="container">
+    <h1>Would You Be My Valentine? 💕</h1>
+    <button class="yes" onclick="yesClicked()">YES</button>
+    <button class="no" id="noBtn">NO</button>
+  </div>
+</div>
+
+<!-- SCREEN 2 TEASE -->
+<div class="screen" id="screen2">
+  <div class="container">
+    <div class="tease">Ohh? BBY you thought you had a choice?</div>
+    <button class="yes" onclick="finalScreen()">Continue</button>
+  </div>
+</div>
+
+<!-- SCREEN 3 FINAL -->
+<div class="screen" id="screen3">
+  <div class="big-heart">❤️</div>
+  <div class="final-text">
+    You’re already mine HEHHEHE.<br><br>
+    Foreverrrr.
+    Happy Valetine my Xuan Xuan I LOVEE YOUUUU💚🩵
+  </div>
+</div>
+
+<script>
+
+const noBtn = document.getElementById("noBtn");
+const screen1 = document.getElementById("screen1");
+const container = screen1.querySelector(".container");
+
+// --- MOVE NO BUTTON INSIDE SAFE AREA ---
+function moveNoSmooth() {
+
+  const containerRect = container.getBoundingClientRect();
+  const btnWidth = noBtn.offsetWidth;
+  const btnHeight = noBtn.offsetHeight;
+
+  const padding = 20;
+
+  const minX = containerRect.left + padding;
+  const maxX = containerRect.right - btnWidth - padding;
+
+  const minY = containerRect.top + 60;
+  const maxY = containerRect.bottom - btnHeight - padding;
+
+  const newX = Math.random() * (maxX - minX) + minX;
+  const newY = Math.random() * (maxY - minY) + minY;
+
+  noBtn.style.transition = "all 0.35s ease";
+  noBtn.style.left = newX + "px";
+  noBtn.style.top = newY + "px";
+}
+
+noBtn.addEventListener("mouseenter", moveNoSmooth);
+noBtn.addEventListener("click", moveNoSmooth);
+
+
+// --- SCREEN TRANSITIONS ---
+function yesClicked(){
+  document.getElementById("screen1").classList.remove("active");
+  document.getElementById("screen2").classList.add("active");
+}
+
+function finalScreen(){
+  document.getElementById("screen2").classList.remove("active");
+  document.getElementById("screen3").classList.add("active");
+
+  startHeartRain();
+}
+
+
+// --- FLOATING HEARTS ---
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.bottom = "-20px";
+  heart.style.fontSize = (Math.random()*30 + 20) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{
+    heart.remove();
+  },6000);
+}
+
+let heartInterval;
+
+function startHeartRain(){
+  heartInterval = setInterval(()=>{
+    createHeart();
+  },250);
+}
+
+</script>
+
+
+
+
+</body>
+</html>
