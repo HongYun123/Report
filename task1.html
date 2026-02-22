@@ -8,10 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
+/* BODY LAYOUT FIX */
 body {
   margin: 0;
-  height: 100vh;
-  position: relative;
+  min-height: 100vh;
   background-image: url('background.jpg');
   background-position: center;
   background-size: cover;
@@ -19,7 +19,34 @@ body {
   background-attachment: fixed;
   font-family: 'Press Start 2P', monospace;
   color: white;
-  overflow: hidden;
+  overflow-x: hidden;
+
+  /* NEW */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 20px;
+}
+
+/* Remove absolute positioning */
+.box {
+  position: relative;   /* changed from absolute */
+  width: 420px;
+  max-width: 90%;
+  background: rgba(15,15,15,0.95);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(255, 80, 140, 0.6);
+}
+
+/* Remove manual placements */
+.box1, .box2, .box3 {
+  top: unset;
+  left: unset;
+  right: unset;
+  bottom: unset;
 }
 
 /* Dark overlay */
