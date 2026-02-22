@@ -48,24 +48,7 @@ body::before {
   border-radius: 20px;
   box-shadow: 0 0 30px rgba(100,100,100,0.6);
   text-align: center;
-}
-
-/* HEART PULSE BEHIND TITLE */
-.heart-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -60%);
-  font-size: 140px;
-  opacity: 0.15;
-  animation: pulse 2s infinite;
-  z-index: 1;
-}
-
-@keyframes pulse {
-  0% { transform: translate(-50%, -60%) scale(1); }
-  50% { transform: translate(-50%, -60%) scale(1.2); }
-  100% { transform: translate(-50%, -60%) scale(1); }
+  margin-bottom: 30px; /* space below box for button */
 }
 
 /* TITLES */
@@ -92,11 +75,11 @@ h1 {
   font-size: 12px;
   opacity: 0.9;
   max-width: 1000px;
-  margin: 0 auto 40px;
+  margin: 0 auto;
   line-height: 2.3;
 }
 
-/* BUTTON */
+/* BUTTON BELOW BOX */
 button {
   padding: 15px 40px;
   font-size: 12px;
@@ -107,6 +90,7 @@ button {
   border-radius: 8px;
   box-shadow: 0 4px 0 #87CEEB;
   transition: 0.2s;
+  z-index: 2;
 }
 
 button:hover {
@@ -148,10 +132,11 @@ button:active {
     This reflection documents the key tasks I was involved in during my internship, 
     the skills I’ve developed and the lessons I’ve picked up which supports my growth both professionally and personally.
   </p>
-
-  
 </div>
+
+<!-- BUTTON OUTSIDE BOX -->
 <button onclick="start()">Next</button>
+
 <script>
 function start(){
   window.location.href="desktop.html";
