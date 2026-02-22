@@ -27,7 +27,7 @@ body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.6);
 }
 
 /* Shared box style */
@@ -44,8 +44,21 @@ body::before {
 .title {
   font-size: 14px;
   margin-bottom: 20px;
+  min-height: 40px;
 }
 
+/* Typing cursor */
+.typing::after {
+  content: "|";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Content */
 .content {
   font-size: 10px;
   line-height: 1.8;
@@ -57,11 +70,30 @@ body::before {
   margin-bottom: 15px;
 }
 
-/* Position each box separately */
+/* Position each box */
 .box1 { top: 10%; left: 8%; }
 .box2 { top: 25%; right: 8%; }
 .box3 { bottom: 10%; left: 30%; }
 
+/* Floating icon */
+.heart {
+  position: absolute;
+  font-size: 18px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
 </style>
 </head>
 
@@ -69,44 +101,76 @@ body::before {
 
 <!-- BOX 1 -->
 <div class="box box1">
-  <div class="title">Marketing Analytics, Conversion Tracking 📈</div>
+  <div class="title typing" id="title1"></div>
   <div class="content">
     <span class="underline">Task Assigned</span>
     Configured Google Analytics 4 (GA4) conversion tracking using Google Tag Manager (GTM) to accurately track course purchases across multiple marketing channels.
     <br><br>
     The website contained dynamic course pages requiring custom logic and session storage to capture values correctly.
-    <br><br>
-    It required structured sequencing and logical flow thinking similar to AI & Robotics.
   </div>
 </div>
 
 <!-- BOX 2 -->
 <div class="box box2">
-  <div class="title">Learning Points</div>
+  <div class="title typing" id="title2"></div>
   <div class="content">
-    A configuration mistake affected the live website and impacted my confidence, teaching me that digital implementation carries real consequences.
+    A configuration mistake affected the live website and taught me that digital implementation carries real consequences.
     <br><br>
     • Test carefully before publishing  
     <br>
-    • Isolate variables instead of changing multiple elements  
+    • Isolate variables  
     <br>
     • Use structured troubleshooting  
-    <br><br>
-    Technical work requires trial and error before stability.
   </div>
 </div>
 
 <!-- BOX 3 -->
 <div class="box box3">
-  <div class="title">Value-added</div>
+  <div class="title typing" id="title3"></div>
   <div class="content">
-    After multiple rounds of testing and debugging, I successfully configured functional conversion tracking.
+    After multiple rounds of debugging, I successfully configured functional conversion tracking.
     <br><br>
     The company can now track marketing conversions automatically with clearer data visibility.
-    <br><br>
-    This supports better strategic planning and resource allocation.
   </div>
 </div>
+
+<script>
+
+/* TYPEWRITER FOR 3 TITLES */
+function typeWriter(elementId, text, speed, delay) {
+  let i = 0;
+  const element = document.getElementById(elementId);
+
+  setTimeout(() => {
+    function typing() {
+      if (i < text.length) {
+        element.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, speed);
+      }
+    }
+    typing();
+  }, delay);
+}
+
+typeWriter("title1", "Marketing Analytics, Conversion Tracking 📈", 40, 0);
+typeWriter("title2", "Learning Points", 40, 1200);
+typeWriter("title3", "Value-added", 40, 2200);
+
+
+/* Floating 📈 icons */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "📈";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.bottom = "-20px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}, 900);
+
+</script>
 
 </body>
 </html>
