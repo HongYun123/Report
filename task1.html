@@ -24,7 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 30px;
   padding: 80px 20px;
 }
@@ -41,7 +41,7 @@ body::before {
 /* Clean box style with gray background */
 .box {
   position: relative;
-  width: 480px;        /* smaller width */
+  width: 380px;        /* smaller width */
   max-width: 85%;
   padding: 22px; 
   border-radius: 20px;
@@ -69,7 +69,8 @@ body::before {
 .content {
   font-size: 9px;
   line-height: 1.6;
-
+}
+  
 .underline {
   text-decoration: underline;
   display: block;
