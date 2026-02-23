@@ -162,11 +162,15 @@ h1 {
   </div>
 </div>
 
-
 <script>
+function go(page){
+  window.location.href = page;
+}
+
 function goBack(){
   window.location.href = "index.html";
 }
+
 /* Sparkles */
 setInterval(() => {
   const sparkle = document.createElement("div");
@@ -178,11 +182,6 @@ setInterval(() => {
 
   setTimeout(() => sparkle.remove(), 6000);
 }, 700);
-  
-  function goBack(){
-  window.history.back();
-}
-
 </script>
 
 </body>
